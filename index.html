@@ -1,147 +1,159 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta name="google-site-verification" content="IyDT0iJQiHbDOTUeFljSpRpgDBRBUQz7YAHLvg7MeX4" /><meta charset="UTF-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calcolatore percentuale, BMI , contatore parole e generatore password online</title>
+<title>EasyTool - Strumenti Online Gratuiti</title>
+<meta name="description" content="Strumenti online gratuiti: percentuale, BMI, contatore parole, password, convertitori, calcolo età e molti altri tool utili.">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:'Roboto',sans-serif;background:#e0f2fe;color:#1e293b}
-header{background:linear-gradient(135deg,#3b82f6,#06b6d4);color:white;padding:50px 20px;text-align:center;clip-path:polygon(0 0,100% 0,100% 85%,0 100%)}
-header h1{font-size:48px;margin:0;animation:fadeInDown 1s ease;}
-header p{font-size:20px;margin:10px 0 0;animation:fadeInUp 1s ease;}
-@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-nav{background:#1e3a8a;padding:12px;text-align:center;position:sticky;top:0;z-index:10;box-shadow:0 2px 6px rgba(0,0,0,0.2)}
-nav a{color:white;margin:0 14px;text-decoration:none;font-weight:bold;transition:0.3s}
-nav a:hover{color:#facc15}
-.container{max-width:1000px;margin:auto;padding:25px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
-.card{background:white;border-radius:16px;padding:25px;box-shadow:0 10px 25px rgba(0,0,0,0.1);transition:transform 0.3s,box-shadow 0.3s}
-.card:hover{transform:translateY(-8px);box-shadow:0 15px 30px rgba(0,0,0,0.2)}
-h2{text-align:center;margin-bottom:15px;color:#1e40af}
-.tool{display:flex;flex-direction:column;gap:12px;margin-top:10px}
-input, select, textarea{padding:12px;font-size:16px;border:1px solid #cbd5e1;border-radius:8px;outline:none;transition:0.2s}
-input:focus, select:focus, textarea:focus{border-color:#3b82f6;box-shadow:0 0 5px rgba(59,130,246,0.5)}
-button{padding:12px;font-size:16px;border:none;background:#3b82f6;color:white;border-radius:8px;cursor:pointer;transition:0.3s}
-button:hover{background:#2563eb}
-.result{margin-top:15px;font-weight:bold;font-size:18px;text-align:center;color:#1e40af}
-footer{background:#1e3a8a;color:white;text-align:center;padding:20px;margin-top:40px;clip-path:polygon(0 0,100% 15%,100% 100%,0 100%)}
+body{margin:0;font-family:'Roboto',sans-serif;background:#e8f1ff;color:#1e293b}
+header{background:linear-gradient(135deg,#2563eb,#06b6d4);color:white;text-align:center;padding:50px 20px}
+header h1{margin:0;font-size:42px}
+header p{margin-top:10px;font-size:18px}
+nav{background:#1e3a8a;padding:12px;text-align:center;position:sticky;top:0}
+nav a{color:white;margin:0 10px;text-decoration:none;font-weight:bold}
+.container{max-width:1100px;margin:auto;padding:25px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.card{background:white;border-radius:14px;padding:20px;box-shadow:0 10px 20px rgba(0,0,0,0.08)}
+.card h2{font-size:20px;margin-top:0;color:#1e40af}
+input,select,textarea{width:100%;padding:10px;margin-top:8px;border:1px solid #cbd5e1;border-radius:6px}
+button{margin-top:10px;padding:10px;border:none;background:#2563eb;color:white;border-radius:6px;cursor:pointer}
+button:hover{background:#1d4ed8}
+.result{margin-top:10px;font-weight:bold;color:#1e40af}
+footer{background:#1e3a8a;color:white;text-align:center;padding:20px;margin-top:30px}
 </style>
 </head>
 <body>
 
 <header>
-<h1>Strumenti Utili Online</h1>
-<p>Divertiti con i nostri tool interattivi e gratuiti!</p>
+<h1>EasyTool</h1>
+<p>Collezione di strumenti online gratuiti e veloci</p>
 </header>
 
 <nav>
-<a href="#percentuale">Calcolatore %</a>
-<a href="#parole">Contatore parole</a>
-<a href="#password">Generatore password</a>
-<a href="#valute">Convertitore valute</a>
-<a href="#bmi">Calcolatore BMI</a>
+<a href="#tools">Strumenti</a>
 <a href="#contatti">Contatti</a>
 </nav>
 
-<div class="container">
-<div class="card" id="percentuale">
+<div class="container" id="tools">
+
+<div class="card">
 <h2>Calcolatore Percentuale</h2>
-<div class="tool">
-<input id="numero" type="number" placeholder="Numero">
-<input id="percentuale" type="number" placeholder="Percentuale (%)">
-<button onclick="calcolaPercentuale()">Calcola</button>
-</div>
-<div class="result" id="risultatoPercentuale"></div>
+<input id="num" placeholder="Numero">
+<input id="perc" placeholder="Percentuale">
+<button onclick="calcPerc()">Calcola</button>
+<div class="result" id="rPerc"></div>
 </div>
 
-<div class="card" id="parole">
+<div class="card">
 <h2>Contatore Parole</h2>
-<div class="tool">
-<textarea id="testo" rows="4" placeholder="Scrivi qui..."></textarea>
-<button onclick="contaParole()">Conta parole</button>
-</div>
-<div class="result" id="risultatoParole"></div>
+<textarea id="text" rows="3"></textarea>
+<button onclick="countWords()">Conta</button>
+<div class="result" id="rWords"></div>
 </div>
 
-<div class="card" id="password">
+<div class="card">
 <h2>Generatore Password</h2>
-<div class="tool">
-<input id="lunghezza" type="number" placeholder="Lunghezza password" min="4" max="50">
-<button onclick="generaPassword()">Genera</button>
-</div>
-<div class="result" id="risultatoPassword"></div>
+<input id="len" placeholder="Lunghezza">
+<button onclick="genPass()">Genera</button>
+<div class="result" id="rPass"></div>
 </div>
 
-<div class="card" id="valute">
-<h2>Convertitore Valute (EUR ↔ USD)</h2>
-<div class="tool">
-<input id="importo" type="number" placeholder="Importo">
-<select id="tipoCambio">
-<option value="eurToUsd">EUR → USD</option>
-<option value="usdToEur">USD → EUR</option>
+<div class="card">
+<h2>Convertitore EUR/USD</h2>
+<input id="money" placeholder="Importo">
+<select id="cur">
+<option value="e">EUR → USD</option>
+<option value="u">USD → EUR</option>
 </select>
-<button onclick="convertiValuta()">Converti</button>
-</div>
-<div class="result" id="risultatoValuta"></div>
+<button onclick="convMoney()">Converti</button>
+<div class="result" id="rMoney"></div>
 </div>
 
-<div class="card" id="bmi">
+<div class="card">
 <h2>Calcolatore BMI</h2>
-<div class="tool">
-<input id="peso" type="number" placeholder="Peso (kg)">
-<input id="altezza" type="number" placeholder="Altezza (cm)">
-<button onclick="calcolaBMI()">Calcola BMI</button>
-</div>
-<div class="result" id="risultatoBMI"></div>
+<input id="peso" placeholder="Peso kg">
+<input id="altezza" placeholder="Altezza cm">
+<button onclick="calcBMI()">Calcola</button>
+<div class="result" id="rBMI"></div>
 </div>
 
-<div class="card" id="contatti">
+<div class="card">
+<h2>Calcolatore Età</h2>
+<input id="birth" type="date">
+<button onclick="calcAge()">Calcola</button>
+<div class="result" id="rAge"></div>
+</div>
+
+<div class="card">
+<h2>Contatore Caratteri</h2>
+<textarea id="chars" rows="3"></textarea>
+<button onclick="countChars()">Conta</button>
+<div class="result" id="rChars"></div>
+</div>
+
+<div class="card">
+<h2>Convertitore Metri/Piedi</h2>
+<input id="meters" placeholder="Metri">
+<button onclick="convMeters()">Converti</button>
+<div class="result" id="rMeters"></div>
+</div>
+
+<div class="card">
+<h2>Generatore Username</h2>
+<input id="name" placeholder="Nome base">
+<button onclick="genUser()">Genera</button>
+<div class="result" id="rUser"></div>
+</div>
+
+<div class="card">
+<h2>Calcolatore IVA</h2>
+<input id="price" placeholder="Prezzo">
+<button onclick="calcIVA()">Aggiungi IVA 22% </button>
+<div class="result" id="rIVA"></div>
+</div>
+
+<div class="card">
+<h2>Convertitore KG/LB</h2>
+<input id="kg" placeholder="Kg">
+<button onclick="convKG()">Converti</button>
+<div class="result" id="rKG"></div>
+</div>
+
+<div class="card">
+<h2>Numero Casuale</h2>
+<input id="max" placeholder="Numero massimo">
+<button onclick="randNum()">Genera</button>
+<div class="result" id="rRand"></div>
+</div>
+
+</div>
+
+<div class="container" id="contatti">
+<div class="card">
 <h2>Contatti</h2>
 <p>Email: tuo@email.com</p>
 </div>
 </div>
 
 <footer>
-<p>© 2026 Strumenti Utili Online</p>
+<p>© 2026 EasyTool</p>
 </footer>
 
 <script>
-function calcolaPercentuale(){
-let numero=document.getElementById('numero').value;
-let percentuale=document.getElementById('percentuale').value;
-if(numero===""||percentuale===""){
-document.getElementById('risultatoPercentuale').innerText="Inserisci entrambi i valori";
-return;
-}
-document.getElementById('risultatoPercentuale').innerText=percentuale+"% di "+numero+" = "+(numero*percentuale/100);
-}
-function contaParole(){
-let testo=document.getElementById('testo').value.trim();
-let parole=testo===""?0:testo.split(/\s+/).length;
-document.getElementById('risultatoParole').innerText="Numero di parole: "+parole;
-}
-function generaPassword(){
-let lunghezza=document.getElementById('lunghezza').value;
-if(lunghezza===""||lunghezza<4){alert("Inserisci una lunghezza minima di 4");return;}
-let chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
-let password="";
-for(let i=0;i<lunghezza;i++){password+=chars.charAt(Math.floor(Math.random()*chars.length));}
-document.getElementById('risultatoPassword').innerText=password;
-}
-function convertiValuta(){
-let importo=parseFloat(document.getElementById('importo').value);
-let tipo=document.getElementById('tipoCambio').value;
-if(isNaN(importo)){alert("Inserisci un importo valido");return;}
-const tasso=1.1;
-document.getElementById('risultatoValuta').innerText=importo+(tipo==='eurToUsd'?' EUR = ':' USD = ')+((tipo==='eurToUsd'?importo*tasso:importo/tasso).toFixed(2))+(tipo==='eurToUsd'?' USD':' EUR');
-}
-function calcolaBMI(){
-let peso=parseFloat(document.getElementById('peso').value);
-let altezza=parseFloat(document.getElementById('altezza').value)/100;
-if(isNaN(peso)||isNaN(altezza)||altezza===0){alert("Inserisci valori validi");return;}
-document.getElementById('risultatoBMI').innerText="Il tuo BMI è: "+(peso/(altezza*altezza)).toFixed(2);
-}
+function calcPerc(){let n=document.getElementById('num').value;let p=document.getElementById('perc').value;document.getElementById('rPerc').innerText=(n*p/100)}
+function countWords(){let t=document.getElementById('text').value.trim();document.getElementById('rWords').innerText=t==""?0:t.split(/\s+/).length}
+function genPass(){let l=document.getElementById('len').value;let c="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";let p="";for(let i=0;i<l;i++){p+=c[Math.floor(Math.random()*c.length)]}document.getElementById('rPass').innerText=p}
+function convMoney(){let v=document.getElementById('money').value;let t=document.getElementById('cur').value;let rate=1.1;document.getElementById('rMoney').innerText=t=='e'?v*rate:v/rate}
+function calcBMI(){let p=document.getElementById('peso').value;let h=document.getElementById('altezza').value/100;document.getElementById('rBMI').innerText=(p/(h*h)).toFixed(2)}
+function calcAge(){let b=new Date(document.getElementById('birth').value);let diff=Date.now()-b.getTime();let age=new Date(diff);document.getElementById('rAge').innerText=Math.abs(age.getUTCFullYear()-1970)+" anni"}
+function countChars(){document.getElementById('rChars').innerText=document.getElementById('chars').value.length}
+function convMeters(){let m=document.getElementById('meters').value;document.getElementById('rMeters').innerText=(m*3.28084).toFixed(2)+" ft"}
+function genUser(){let n=document.getElementById('name').value;let r=Math.floor(Math.random()*1000);document.getElementById('rUser').innerText=n+r}
+function calcIVA(){let p=document.getElementById('price').value;document.getElementById('rIVA').innerText=(p*1.22).toFixed(2)}
+function convKG(){let kg=document.getElementById('kg').value;document.getElementById('rKG').innerText=(kg*2.20462).toFixed(2)+" lb"}
+function randNum(){let m=document.getElementById('max').value;document.getElementById('rRand').innerText=Math.floor(Math.random()*m)}
 </script>
 
 </body>
