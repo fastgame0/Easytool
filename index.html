@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strumenti Utili Online</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Roboto',sans-serif;background:#e0f2fe;color:#1e293b}
+header{background:linear-gradient(135deg,#3b82f6,#06b6d4);color:white;padding:50px 20px;text-align:center;clip-path:polygon(0 0,100% 0,100% 85%,0 100%)}
+header h1{font-size:48px;margin:0;animation:fadeInDown 1s ease;}
+header p{font-size:20px;margin:10px 0 0;animation:fadeInUp 1s ease;}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+nav{background:#1e3a8a;padding:12px;text-align:center;position:sticky;top:0;z-index:10;box-shadow:0 2px 6px rgba(0,0,0,0.2)}
+nav a{color:white;margin:0 14px;text-decoration:none;font-weight:bold;transition:0.3s}
+nav a:hover{color:#facc15}
+.container{max-width:1000px;margin:auto;padding:25px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
+.card{background:white;border-radius:16px;padding:25px;box-shadow:0 10px 25px rgba(0,0,0,0.1);transition:transform 0.3s,box-shadow 0.3s}
+.card:hover{transform:translateY(-8px);box-shadow:0 15px 30px rgba(0,0,0,0.2)}
+h2{text-align:center;margin-bottom:15px;color:#1e40af}
+.tool{display:flex;flex-direction:column;gap:12px;margin-top:10px}
+input, select, textarea{padding:12px;font-size:16px;border:1px solid #cbd5e1;border-radius:8px;outline:none;transition:0.2s}
+input:focus, select:focus, textarea:focus{border-color:#3b82f6;box-shadow:0 0 5px rgba(59,130,246,0.5)}
+button{padding:12px;font-size:16px;border:none;background:#3b82f6;color:white;border-radius:8px;cursor:pointer;transition:0.3s}
+button:hover{background:#2563eb}
+.result{margin-top:15px;font-weight:bold;font-size:18px;text-align:center;color:#1e40af}
+footer{background:#1e3a8a;color:white;text-align:center;padding:20px;margin-top:40px;clip-path:polygon(0 0,100% 15%,100% 100%,0 100%)}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Strumenti Utili Online</h1>
+<p>Divertiti con i nostri tool interattivi e gratuiti!</p>
+</header>
+
+<nav>
+<a href="#percentuale">Calcolatore %</a>
+<a href="#parole">Contatore parole</a>
+<a href="#password">Generatore password</a>
+<a href="#valute">Convertitore valute</a>
+<a href="#bmi">Calcolatore BMI</a>
+<a href="#contatti">Contatti</a>
+</nav>
+
+<div class="container">
+<div class="card" id="percentuale">
+<h2>Calcolatore Percentuale</h2>
+<div class="tool">
+<input id="numero" type="number" placeholder="Numero">
+<input id="percentuale" type="number" placeholder="Percentuale (%)">
+<button onclick="calcolaPercentuale()">Calcola</button>
+</div>
+<div class="result" id="risultatoPercentuale"></div>
+</div>
+
+<div class="card" id="parole">
+<h2>Contatore Parole</h2>
+<div class="tool">
+<textarea id="testo" rows="4" placeholder="Scrivi qui..."></textarea>
+<button onclick="contaParole()">Conta parole</button>
+</div>
+<div class="result" id="risultatoParole"></div>
+</div>
+
+<div class="card" id="password">
+<h2>Generatore Password</h2>
+<div class="tool">
+<input id="lunghezza" type="number" placeholder="Lunghezza password" min="4" max="50">
+<button onclick="generaPassword()">Genera</button>
+</div>
+<div class="result" id="risultatoPassword"></div>
+</div>
+
+<div class="card" id="valute">
+<h2>Convertitore Valute (EUR ↔ USD)</h2>
+<div class="tool">
+<input id="importo" type="number" placeholder="Importo">
+<select id="tipoCambio">
+<option value="eurToUsd">EUR → USD</option>
+<option value="usdToEur">USD → EUR</option>
+</select>
+<button onclick="convertiValuta()">Converti</button>
+</div>
+<div class="result" id="risultatoValuta"></div>
+</div>
+
+<div class="card" id="bmi">
+<h2>Calcolatore BMI</h2>
+<div class="tool">
+<input id="peso" type="number" placeholder="Peso (kg)">
+<input id="altezza" type="number" placeholder="Altezza (cm)">
+<button onclick="calcolaBMI()">Calcola BMI</button>
+</div>
+<div class="result" id="risultatoBMI"></div>
+</div>
+
+<div class="card" id="contatti">
+<h2>Contatti</h2>
+<p>Email: tuo@email.com</p>
+</div>
+</div>
+
+<footer>
+<p>© 2026 Strumenti Utili Online</p>
+</footer>
+
+<script>
+function calcolaPercentuale(){
+let numero=document.getElementById('numero').value;
+let percentuale=document.getElementById('percentuale').value;
+if(numero===""||percentuale===""){
+document.getElementById('risultatoPercentuale').innerText="Inserisci entrambi i valori";
+return;
+}
+document.getElementById('risultatoPercentuale').innerText=percentuale+"% di "+numero+" = "+(numero*percentuale/100);
+}
+function contaParole(){
+let testo=document.getElementById('testo').value.trim();
+let parole=testo===""?0:testo.split(/\s+/).length;
+document.getElementById('risultatoParole').innerText="Numero di parole: "+parole;
+}
+function generaPassword(){
+let lunghezza=document.getElementById('lunghezza').value;
+if(lunghezza===""||lunghezza<4){alert("Inserisci una lunghezza minima di 4");return;}
+let chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
+let password="";
+for(let i=0;i<lunghezza;i++){password+=chars.charAt(Math.floor(Math.random()*chars.length));}
+document.getElementById('risultatoPassword').innerText=password;
+}
+function convertiValuta(){
+let importo=parseFloat(document.getElementById('importo').value);
+let tipo=document.getElementById('tipoCambio').value;
+if(isNaN(importo)){alert("Inserisci un importo valido");return;}
+const tasso=1.1;
+document.getElementById('risultatoValuta').innerText=importo+(tipo==='eurToUsd'?' EUR = ':' USD = ')+((tipo==='eurToUsd'?importo*tasso:importo/tasso).toFixed(2))+(tipo==='eurToUsd'?' USD':' EUR');
+}
+function calcolaBMI(){
+let peso=parseFloat(document.getElementById('peso').value);
+let altezza=parseFloat(document.getElementById('altezza').value)/100;
+if(isNaN(peso)||isNaN(altezza)||altezza===0){alert("Inserisci valori validi");return;}
+document.getElementById('risultatoBMI').innerText="Il tuo BMI è: "+(peso/(altezza*altezza)).toFixed(2);
+}
+</script>
+
+</body>
+</html>
+
