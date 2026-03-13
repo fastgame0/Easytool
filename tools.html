@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EasyTool - Strumenti</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+body{margin:0;font-family:'Roboto',sans-serif;background:#e8f1ff;color:#1e293b}
+header{background:linear-gradient(135deg,#2563eb,#06b6d4);color:white;text-align:center;padding:50px 20px}
+header h1{margin:0;font-size:42px}
+header p{margin-top:10px;font-size:18px}
+nav{background:#1e3a8a;padding:12px;text-align:center;position:sticky;top:0}
+nav a{color:white;margin:0 10px;text-decoration:none;font-weight:bold}
+.container{max-width:1100px;margin:auto;padding:25px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.card{background:white;border-radius:14px;padding:20px;box-shadow:0 10px 20px rgba(0,0,0,0.08);transition:transform 0.3s, box-shadow 0.3s}
+.card:hover{transform:translateY(-5px);box-shadow:0 15px 25px rgba(0,0,0,0.15)}
+.card h2{font-size:20px;margin-top:0;color:#1e40af;display:flex;align-items:center;gap:8px}
+.card p{font-size:14px;color:#334155;margin-top:5px}
+input,select,textarea{width:100%;padding:10px;margin-top:8px;border:1px solid #cbd5e1;border-radius:6px}
+button{margin-top:10px;padding:10px;border:none;background:#2563eb;color:white;border-radius:6px;cursor:pointer;display:flex;align-items:center;gap:6px}
+button:hover{background:#1d4ed8}
+.result{margin-top:10px;font-weight:bold;color:#1e40af;transition:all 0.3s}
+.result.show{transform:scale(1.05);color:#2563eb}
+footer{background:#1e3a8a;color:white;text-align:center;padding:20px;margin-top:30px}
+</style>
+</head>
+<body>
+
+<header>
+<h1><i class="fa-solid fa-toolbox"></i> EasyTool</h1>
+<p>Tutti gli strumenti gratuiti disponibili online</p>
+</header>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="tools.html">Strumenti 🛠️</a>
+<a href="minigame.html">Minigame 🎮</a>
+<a href="#contatti">Contatti</a>
+</nav>
+
+<div class="container" id="tools">
+
+<div class="card">
+<h2><i class="fa-solid fa-percent"></i> Calcolatore Percentuale</h2>
+<p>Inserisci un numero e una percentuale per calcolare rapidamente il valore percentuale.</p>
+<input id="num" placeholder="Numero">
+<input id="perc" placeholder="Percentuale">
+<button onclick="calcPerc()"><i class="fa-solid fa-calculator"></i> Calcola</button>
+<div class="result" id="rPerc"></div>
+</div>
+
+<div class="card">
+<h2><i class="fa-solid fa-keyboard"></i> Contatore Parole</h2>
+<p>Conta quante parole contiene il tuo testo in pochi secondi.</p>
+<textarea id="text" rows="3"></textarea>
+<button onclick="countWords()"><i class="fa-solid fa-calculator"></i> Conta</button>
+<div class="result" id="rWords"></div>
+</div>
+
+<div class="card">
+<h2><i class="fa-solid fa-lock"></i> Generatore Password</h2>
+<p>Crea password sicure casuali con la lunghezza che desideri.</p>
+<input id="len" placeholder="Lunghezza">
+<button onclick="genPass()"><i class="fa-solid fa-key"></i> Genera</button>
+<div class="result" id="rPass"></div>
+</div>
+
+<div class="card">
+<h2><i class="fa-solid fa-dollar-sign"></i> Convertitore EUR/USD</h2>
+<p>Converti facilmente da Euro a Dollaro e viceversa.</p>
+<input id="money" placeholder="Importo">
+<select id="cur">
+<option value="e">EUR → USD</option>
+<option value="u">USD → EUR</option>
+</select>
+<button onclick="convMoney()"><i class="fa-solid fa-exchange-alt"></i> Converti</button>
+<div class="result" id="rMoney"></div>
+</div>
+
+<div class="card">
+<h2><i class="fa-solid fa-heart-pulse"></i> Calcolatore BMI</h2>
+<p>Calcola il tuo indice di massa corporea inserendo peso e altezza.</p>
+<input id="peso" placeholder="Peso kg">
+<input id="altezza" placeholder="Altezza cm">
+<button onclick="calcBMI()"><i class="fa-solid fa-calculator"></i> Calcola</button>
+<div class="result" id="rBMI"></div>
+</div>
+
+<div class="card">
+<h2><i class="fa-solid fa-birthday-cake"></i> Calcolatore Età</h2>
+<p>Scopri la tua età esatta inserendo la tua data di nascita.</p>
+<input id="birth" type="date">
+<button onclick="calcAge()"><i class="fa-solid fa-calculator"></i> Calcola</button>
+<div class="result" id="rAge"></div>
+</div>
+
+<div class="card">
+<h2><i class="fa-solid fa-text-height"></i> Contatore Caratteri</h2>
+<p>Conta rapidamente il numero di caratteri presenti nel tuo testo.</p>
+<textarea id="chars" rows="3"></textarea>
+<button onclick="countChars()"><i class="fa-solid fa-calculator"></i> Conta</button>
+<div class="result" id="rChars"></div>
+</div>
+
+<div class="card">
+<h2><i class="fa-solid fa-ruler"></i> Convertitore Metri/Piedi</h2>
+<p>Converti facilmente metri in piedi per misure internazionali.</p>
+<input id="meters" placeholder="Metri">
+<button onclick="convMeters()"><i class="fa-solid fa-exchange-alt"></i> Converti</button>
+<div class="result" id="rMeters"></div>
+</div>
+
+<div class="card">
+<h2><i class="fa-solid fa-user"></i> Generatore Username</h2>
+<p>Inserisci un nome base e genera un username unico per social o giochi.</p>
+<input id="name" placeholder="Nome base">
+<button onclick="genUser()"><i class="fa-solid fa-user-plus"></i> Genera</button>
+<div class="result" id="rUser"></div>
+</div>
+
+<div class="card">
+<h2><i class="fa-solid fa-coins"></i> Calcolatore IVA</h2>
+<p>Calcola facilmente il prezzo finale aggiungendo il 22% di IVA.</p>
+<input id="price" placeholder="Prezzo">
+<button onclick="calcIVA()"><i class="fa-solid fa-calculator"></i> Calcola</button>
+<div class="result" id="rIVA"></div>
+</div>
+
+<div class="card">
+<h2><i class="fa-solid fa-weight-scale"></i> Convertitore KG/LB</h2>
+<p>Converti velocemente tra chilogrammi e libbre.</p>
+<input id="kg" placeholder="Kg">
+<button onclick="convKG()"><i class="fa-solid fa-exchange-alt"></i> Converti</button>
+<div class="result" id="rKG"></div>
+</div>
+
+<div class="card">
+<h2><i class="fa-solid fa-dice"></i> Generatore Numero Casuale</h2>
+<p>Genera numeri casuali fino al massimo che inserisci.</p>
+<input id="max" placeholder="Numero massimo">
+<button onclick="randNum()"><i class="fa-solid fa-dice"></i> Genera</button>
+<div class="result" id="rRand"></div>
+
+</div>
+
+<footer>
+<p>© 2026 EasyTool</p>
+</footer>
+
+<script>
+// Qui va tutto lo script dei tool dal tuo index originale
+function showResult(id,text){let el=document.getElementById(id);el.innerText=text;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),800)}
+function calcPerc(){let n=document.getElementById('num').value;let p=document.getElementById('perc').value;showResult('rPerc',n*p/100)}
+// Aggiungi tutti gli altri script dei tool qui (BMI, password, contatore parole, ecc.)
+</script>
+
+</body>
+</html>
