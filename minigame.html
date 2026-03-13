@@ -1,175 +1,441 @@
 <!DOCTYPE html>
 
 <html lang="it">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EasyTool - Minigame Tutti in Uno</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<title>EasyTool Minigame</title>
+
 <style>
-body{font-family:'Roboto',sans-serif;background:#f0f4f8;color:#1e293b;margin:0;padding:20px}
-h1{text-align:center;margin-bottom:20px}
-.menu{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:20px}
-.menu button{padding:10px 15px;border:none;background:#2563eb;color:white;border-radius:6px;cursor:pointer;display:flex;align-items:center;gap:6px}
-.menu button:hover{background:#1d4ed8}
-.game-container{max-width:800px;margin:auto;background:white;padding:20px;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,0.1)}
-.game-container h2{text-align:center}
-input,textarea{width:100%;padding:8px;margin-top:8px;border:1px solid #cbd5e1;border-radius:6px}
-button.play{margin-top:10px;width:100%;}
-.result{margin-top:10px;font-weight:bold;color:#1e40af;transition:all 0.3s}
-.result.show{transform:scale(1.05);color:#2563eb}
-.game-board{display:grid;gap:5px;margin-top:10px}
-.cell{background:#e2e8f0;padding:15px;font-size:24px;text-align:center;border-radius:6px;cursor:pointer}
-.cell:hover{background:#cbd5e1}
-canvas#snakeCanvas{background:#e2e8f0;display:block;margin:auto;border-radius:12px}
+
+body{
+margin:0;
+font-family:Arial;
+background:#0f172a;
+color:white
+}
+
+header{
+background:linear-gradient(135deg,#2563eb,#06b6d4);
+padding:50px;
+text-align:center
+}
+
+nav{
+background:#1e293b;
+padding:12px;
+text-align:center
+}
+
+nav a{
+color:white;
+margin:0 12px;
+text-decoration:none;
+font-weight:bold
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:30px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px
+}
+
+.game{
+background:#1e293b;
+padding:20px;
+border-radius:12px;
+text-align:center
+}
+
+button{
+padding:10px;
+border:none;
+background:#2563eb;
+color:white;
+border-radius:6px;
+cursor:pointer
+}
+
+canvas{
+background:black;
+margin-top:10px
+}
+
+.cell{
+width:45px;
+height:45px;
+background:#334155;
+display:inline-block;
+margin:3px;
+cursor:pointer
+}
+
+.tris{
+width:60px;
+height:60px;
+font-size:30px
+}
+
 </style>
+
 </head>
+
 <body>
-<h1><i class="fa-solid fa-gamepad"></i> Minigame Tutti in Uno</h1>
-<div class="menu">
-<button onclick="showGame('indovina')"><i class="fa-solid fa-dice"></i> Indovina Numero</button>
-<button onclick="showGame('clickrapido')"><i class="fa-solid fa-mouse"></i> Click Rapido</button>
-<button onclick="showGame('memory')"><i class="fa-solid fa-th-large"></i> Memory</button>
-<button onclick="showGame('quiz')"><i class="fa-solid fa-question"></i> Quiz</button>
-<button onclick="showGame('tictactoe')"><i class="fa-solid fa-square"></i> Tic-Tac-Toe</button>
-<button onclick="showGame('snake')"><i class="fa-solid fa-arrows-up-down-left-right"></i> Snake</button>
-<button onclick="showGame('puzzle')"><i class="fa-solid fa-puzzle-piece"></i> Puzzle Numerico</button>
+
+<header>
+
+<h1>🎮 EasyTool Games</h1>
+<p>Divertiti con i giochi online</p>
+
+</header>
+
+<nav>
+
+<a href="index.html">Home</a> <a href="tools.html">Strumenti</a> <a href="minigame.html">Minigame</a>
+
+</nav>
+
+<div class="container">
+
+<!-- SNAKE -->
+
+<div class="game">
+
+<h3>🐍 Snake</h3>
+
+<button onclick="startSnake()">Avvia</button>
+
+<br>
+
+<canvas id="snake" width="200" height="200"></canvas>
+
 </div>
-<div class="game-container" id="gameArea">
-<p>Seleziona un gioco dal menu per iniziare!</p>
+
+<!-- PACMAN -->
+
+<div class="game">
+
+<h3>👻 Pac-Man</h3>
+
+<button onclick="startPac()">Avvia</button>
+
+<br>
+
+<canvas id="pac" width="200" height="200"></canvas>
+
 </div>
+
+<!-- QUIZ -->
+
+<div class="game">
+
+<h3>❓ Quiz</h3>
+
+<p id="quiz"></p>
+
+<button onclick="quiz()">Domanda</button>
+
+</div>
+
+<!-- NUMERO -->
+
+<div class="game">
+
+<h3>🔢 Indovina Numero</h3>
+
+<input id="guess">
+
+<button onclick="guess()">Prova</button>
+
+<p id="numResult"></p>
+
+</div>
+
+<!-- BATTAGLIA -->
+
+<div class="game">
+
+<h3>🚢 Battaglia Navale</h3>
+
+<div id="grid"></div>
+
+<p id="battle"></p>
+
+</div>
+
+<!-- DADO -->
+
+<div class="game">
+
+<h3>🎲 Lancia il dado</h3>
+
+<button onclick="dice()">Lancia</button>
+
+<p id="dice"></p>
+
+</div>
+
+<!-- TRIS -->
+
+<div class="game">
+
+<h3>❌⭕ Tris</h3>
+
+<div>
+
+<button class="tris" onclick="play(this)"> </button> <button class="tris" onclick="play(this)"> </button> <button class="tris" onclick="play(this)"> </button> <br> <button class="tris" onclick="play(this)"> </button> <button class="tris" onclick="play(this)"> </button> <button class="tris" onclick="play(this)"> </button> <br> <button class="tris" onclick="play(this)"> </button> <button class="tris" onclick="play(this)"> </button> <button class="tris" onclick="play(this)"> </button>
+
+</div>
+
+</div>
+
+<!-- REACTION -->
+
+<div class="game">
+
+<h3>⚡ Test velocità</h3>
+
+<button onclick="reaction()">Clicca quando appare!</button>
+
+<p id="react"></p>
+
+</div>
+
+<!-- PERSONAGGIO -->
+
+<div class="game">
+
+<h3>🧠 Indovina Personaggio</h3>
+
+<button onclick="person()">Indizio</button>
+
+<p id="person"></p>
+
+</div>
+
+<!-- MEMORY -->
+
+<div class="game">
+
+<h3>🃏 Memory</h3>
+
+<button onclick="memory()">Prova</button>
+
+<p id="memory"></p>
+
+</div>
+
+</div>
+
 <script>
-let currentGame='';
-function showGame(name){
- currentGame=name;
- const area=document.getElementById('gameArea');
- area.innerHTML='';
- switch(name){
-   case 'indovina': area.innerHTML=`<h2>Indovina Numero</h2><input id='numGuess' placeholder='Numero'><button class='play' onclick='guessNum()'>Prova</button><div class='result' id='resultGuess'></div>`; secret=Math.floor(Math.random()*10)+1; break;
-   case 'clickrapido': area.innerHTML=`<h2>Click Rapido</h2><button id='clickBtn' class='play' onclick='clickGame()'>Clicca!</button><div class='result' id='clickResult'>0</div>`; clicks=0; timerStarted=false; break;
-   case 'memory': area.innerHTML=`<h2>Memory Game</h2><button class='play' onclick='startMemory()'>Avvia Memory</button><div class='game-board' id='memoryBoard'></div>`; break;
-   case 'quiz': area.innerHTML=`<h2>Quiz a Tempo</h2><button class='play' onclick='startQuiz()'>Avvia Quiz</button><div class='result' id='quizResult'></div>`; break;
-   case 'tictactoe': area.innerHTML=`<h2>Tic-Tac-Toe</h2><button class='play' onclick='startTicTacToe()'>Avvia Tic-Tac-Toe</button><div class='game-board' id='ticTacToeBoard'></div>`; break;
-   case 'snake': area.innerHTML=`<h2>Snake</h2><canvas id='snakeCanvas' width='400' height='400'></canvas>`; startSnake(); break;
-   case 'puzzle': area.innerHTML=`<h2>Puzzle Numerico</h2><button class='play' onclick='startPuzzle()'>Avvia Puzzle</button><div class='game-board' id='puzzleBoard'></div>`; startPuzzle(); break;
- }
-}
-// Utility
-function showResult(id,text){let el=document.getElementById(id);el.innerText=text;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),800)}
 
-// 1. Indovina Numero
-let secret=Math.floor(Math.random()*10)+1;
-function guessNum(){let val=document.getElementById('numGuess').value;showResult('resultGuess',val==secret?'Hai indovinato! 🎉':'Riprova!')}
+/* SNAKE */
 
-// 2. Click Rapido
-let clicks=0;let timerStarted=false;
-function clickGame(){let res=document.getElementById('clickResult');if(!timerStarted){timerStarted=true;clicks=0;setTimeout(()=>{alert('Hai cliccato '+clicks+' volte!');clicks=0;timerStarted=false;res.innerText=0;},5000);}clicks++;res.innerText=clicks;}
+let sc=document.getElementById("snake").getContext("2d")
 
-// 3. Memory Game semplice
-function startMemory(){
-let board=document.getElementById('memoryBoard');
-board.innerHTML='';
-let cards=['A','A','B','B','C','C','D','D'];
-cards.sort(()=>Math.random()-0.5);
-let flipped=[];
-cards.forEach((val,index)=>{
-let cell=document.createElement('div');cell.className='cell';cell.innerText='?';cell.onclick=()=>{
-if(cell.innerText=='?'){
-cell.innerText=val;
-flipped.push({cell,val});
-if(flipped.length==2){
-if(flipped[0].val!=flipped[1].val){setTimeout(()=>{flipped[0].cell.innerText='?';flipped[1].cell.innerText='?';flipped=[];},500);}else{flipped=[];}
-}
-}
-};
-board.appendChild(cell);
-});
-board.style.gridTemplateColumns='repeat(4,1fr)';
-}
+let sx=100
+let sy=100
 
-// 4. Quiz a tempo
-const quizQ=[
-{q:'2+2=?',a:'4'},
-{q:'Capitale Italia?',a:'Roma'},
-{q:'Colore del cielo?',a:'Blu'}
-];
-function startQuiz(){
-let r=document.getElementById('quizResult');
-let q=quizQ[Math.floor(Math.random()*quizQ.length)];
-let ans=prompt(q.q);
-if(ans===q.a){showResult('quizResult','Corretto! 🎉');}else{showResult('quizResult','Sbagliato! Risposta: '+q.a);}
-}
-
-// 5. Tic-Tac-Toe semplice vs CPU
-function startTicTacToe(){
-let board=document.getElementById('ticTacToeBoard');board.innerHTML='';
-let cells=[];
-let current='X';
-for(let i=0;i<9;i++){
-let cell=document.createElement('div');cell.className='cell';cell.onclick=()=>{
-if(cell.innerText==''){cell.innerText=current;current='O';cpuMove();}
-};
-board.appendChild(cell);cells.push(cell);
-}
-board.style.gridTemplateColumns='repeat(3,1fr)';
-function cpuMove(){let empty=cells.filter(c=>c.innerText=='');if(empty.length>0){empty[Math.floor(Math.random()*empty.length)].innerText='O';current='X';}}
-}
-
-// 6. Snake completo
-let snakeInterval, snakeDir, snakePos, snakeLength, food;
 function startSnake(){
-const canvas=document.getElementById('snakeCanvas');
-const ctx=canvas.getContext('2d');
-const size=20;
-snakePos=[{x:10,y:10}]; snakeLength=5; snakeDir={x:1,y:0};
-spawnFood();
-document.addEventListener('keydown',e=>{
-if(e.key==='ArrowUp') snakeDir={x:0,y:-1};
-if(e.key==='ArrowDown') snakeDir={x:0,y:1};
-if(e.key==='ArrowLeft') snakeDir={x:-1,y:0};
-if(e.key==='ArrowRight') snakeDir={x:1,y:0};
-});
-clearInterval(snakeInterval);
-snakeInterval=setInterval(gameLoop,200);
-function spawnFood(){
-food={x:Math.floor(Math.random()*20),y:Math.floor(Math.random()*20)};
-}
-function gameLoop(){
-let head={x:snakePos.x+snakeDir.x,y:snakePos.y+snakeDir.y};
-snakePos.unshift(head);
-if(snakePos.length>snakeLength) snakePos.pop();
-// collision
-if(head.x<0||head.y<0||head.x>=20||head.y>=20||snakePos.slice(1).some(s=>s.x===head.x&&s.y===head.y)){alert('Game Over'); snakePos=[{x:10,y:10}]; snakeLength=5; return;}
-if(head.x===food.x && head.y===food.y){snakeLength++; spawnFood();}
-ctx.fillStyle='#e2e8f0'; ctx.fillRect(0,0,400,400);
-ctx.fillStyle='green'; snakePos.forEach(s=>ctx.fillRect(s.x*size,s.y*size,size-1,size-1));
-ctx.fillStyle='red'; ctx.fillRect(food.x*size,food.y*size,size-1,size-1);
-}
+
+setInterval(()=>{
+
+sc.clearRect(0,0,200,200)
+
+sx+=10
+
+if(sx>200)sx=0
+
+sc.fillStyle="lime"
+
+sc.fillRect(sx,sy,10,10)
+
+},200)
+
 }
 
-// 7. Puzzle Numerico completo
-function startPuzzle(){
-let board=document.getElementById('puzzleBoard');
-board.innerHTML='';
-let numbers=[1,2,3,4,5,6,7,8,0];
-numbers.sort(()=>Math.random()-0.5);
-function draw(){board.innerHTML='';
-numbers.forEach((num,i)=>{
-let cell=document.createElement('div'); cell.className='cell'; cell.innerText=num!==0?num:'';
-cell.onclick=()=>{
-let emptyIndex=numbers.indexOf(0);
-if([i-1,i+1,i-3,i+3].includes(emptyIndex)){
-numbers[emptyIndex]=numbers[i]; numbers[i]=0; draw();
+
+/* PACMAN */
+
+let pc=document.getElementById("pac").getContext("2d")
+
+let px=100
+let py=100
+
+function startPac(){
+
+document.addEventListener("keydown",e=>{
+
+if(e.key=="ArrowUp")py-=10
+if(e.key=="ArrowDown")py+=10
+if(e.key=="ArrowLeft")px-=10
+if(e.key=="ArrowRight")px+=10
+
+pc.clearRect(0,0,200,200)
+
+pc.beginPath()
+pc.arc(px,py,10,0.2*Math.PI,1.8*Math.PI)
+pc.lineTo(px,py)
+pc.fillStyle="yellow"
+pc.fill()
+
+})
+
 }
-if(numbers.join('')==='123456780'){alert('Hai risolto! 🎉');}
+
+
+/* QUIZ */
+
+let qs=["Capitale Italia?","5x5?","Chi ha scoperto America?"]
+
+function quiz(){
+
+document.getElementById("quiz").innerText=
+
+qs[Math.floor(Math.random()*qs.length)]
+
 }
-board.appendChild(cell);
-});
-board.style.gridTemplateColumns='repeat(3,1fr)';
+
+
+/* NUMERO */
+
+let secret=Math.floor(Math.random()*100)+1
+
+function guess(){
+
+let g=document.getElementById("guess").value
+
+let r=""
+
+if(g==secret)r="🎉 Giusto!"
+else if(g>secret)r="⬇ Troppo alto"
+else r="⬆ Troppo basso"
+
+document.getElementById("numResult").innerText=r
+
 }
-draw();
-} </script>
+
+
+/* BATTAGLIA */
+
+let ship=Math.floor(Math.random()*16)
+
+let grid=document.getElementById("grid")
+
+for(let i=0;i<16;i++){
+
+let c=document.createElement("div")
+
+c.className="cell"
+
+c.onclick=()=>{
+
+if(i==ship){
+
+c.style.background="red"
+
+document.getElementById("battle").innerText="🚢 Colpita!"
+
+}else{
+
+c.style.background="blue"
+
+}
+
+}
+
+grid.appendChild(c)
+
+}
+
+
+/* DADO */
+
+function dice(){
+
+document.getElementById("dice").innerText=
+
+Math.floor(Math.random()*6)+1
+
+}
+
+
+/* TRIS */
+
+let turn="X"
+
+function play(b){
+
+if(b.innerText==""){
+
+b.innerText=turn
+
+turn=turn=="X"?"O":"X"
+
+}
+
+}
+
+
+/* REACTION */
+
+function reaction(){
+
+let t=Math.random()*2000
+
+setTimeout(()=>{
+
+let start=Date.now()
+
+alert("CLICCA!")
+
+let end=Date.now()
+
+document.getElementById("react").innerText=(end-start)+" ms"
+
+},t)
+
+}
+
+
+/* PERSONAGGIO */
+
+let persons=["Messi","Einstein","Michael Jackson","Cristiano Ronaldo"]
+
+function person(){
+
+document.getElementById("person").innerText=
+
+persons[Math.floor(Math.random()*persons.length)]
+
+}
+
+
+/* MEMORY */
+
+function memory(){
+
+let r=Math.random()
+
+if(r>0.5){
+
+document.getElementById("memory").innerText="✔ Coppia trovata"
+
+}else{
+
+document.getElementById("memory").innerText="✘ Riprova"
+
+}
+
+}
+
+</script>
 
 </body>
 </html>
